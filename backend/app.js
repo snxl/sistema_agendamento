@@ -4,19 +4,25 @@ import path from 'path';
 import session from "express-session"
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import { fileURLToPath } from 'url';
 import fs from "fs";
-import path from "path"
+import { resolve } from "path"
 import cors from "cors"
 import dotenv from "dotenv"
 
 dotenv.config()
 
 
-import usersRouter from './routes/users';
-import providersRouter from "./routes/providers"
-import scheduleRoute from "./routes/scheduleRoute"
+import usersRouter from './routes/users.js';
+import providersRouter from "./routes/providers.js"
+import scheduleRoute from "./routes/scheduleRoute.js"
 
-class App{
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+export default new class App{
 
     constructor(){
         this.app = express();
@@ -39,7 +45,7 @@ class App{
         }));
         this.app.use(
             "/files",
-            express.static(path.resolve(__dirname, "public", "uploads"))
+            express.static(resolve(__dirname, "public", "uploads"))
         )
         this.app.use(express.static(path.join(__dirname, 'public')));
     }
@@ -69,5 +75,3 @@ class App{
     }
 
 }
-
-export default new App()

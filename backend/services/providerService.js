@@ -1,4 +1,4 @@
-import db from "../database/models"
+import db from "../database/models/index.js"
 
 export default new class ProviderService{
 

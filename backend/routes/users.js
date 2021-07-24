@@ -1,14 +1,14 @@
 import { Router } from 'express';
 
-import userController from '../controller/userController';
+import userController from '../controller/userController.js';
 
-import * as multer from "../middlewares/multerMiddleware"
+import * as multer from "../middlewares/multerMiddleware.js"
 
-import auth from "../middlewares/auth"
+import auth from "../middlewares/auth.js"
 
-import loginMiddleware from "../middlewares/validateLogin"
-import validateUpdate from '../middlewares/validateUpdate';
-import validateStore from '../middlewares/validateStore';
+import loginMiddleware from "../middlewares/validateLogin.js"
+import validateUpdate from '../middlewares/validateUpdate.js';
+import validateStore from '../middlewares/validateStore.js';
 
 const router = Router();
 

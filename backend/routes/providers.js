@@ -1,11 +1,9 @@
 import { Router } from 'express';
 
-import providerController from '../controller/providerController';
+import * as multer from "../middlewares/multerMiddleware.js"
 
-import * as multer from "../middlewares/multerMiddleware"
-
-import auth from "../middlewares/auth"
-import providerController from '../controller/providerController';
+import auth from "../middlewares/auth.js"
+import providerController from '../controller/providerController.js';
 
 const router = Router();
 

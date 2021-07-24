@@ -1,4 +1,4 @@
-import services from "../services/scheduleService"
+import services from "../services/scheduleService.js"
 
 
 export default new class ScheduleController{

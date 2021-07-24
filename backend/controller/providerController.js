@@ -1,4 +1,4 @@
-import services from "../services/providerService"
+import services from "../services/providerService.js"
 
 
 export default new class ProviderController{
