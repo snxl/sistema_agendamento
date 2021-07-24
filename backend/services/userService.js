@@ -13,11 +13,15 @@ export default new class UserService{
                 where:{
                     provider: false
                 },
-                include:{
+                include:[{
                     model: db.File,
                     as: "avatar",
                     required: false
-                }
+                },{
+                    model: db.Schedule,
+                    as: "hours",
+                    required:false
+                }]
             })
 
             return{

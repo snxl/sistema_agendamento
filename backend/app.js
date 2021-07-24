@@ -14,6 +14,7 @@ dotenv.config()
 
 import usersRouter from './routes/users';
 import providersRouter from "./routes/providers"
+import scheduleRoute from "./routes/scheduleRoute"
 
 class App{
 
@@ -45,7 +46,8 @@ class App{
 
     routes(){
         this.app.use('/users', usersRouter );  
-        this.app.use("/providers", providersRouter)       
+        this.app.use("/providers", providersRouter)      
+        this.app.use("/schedule", scheduleRoute) 
     }
 
     notFound(){

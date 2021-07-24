@@ -9,7 +9,6 @@ export default async (req, res, next)=>{
         password: yup.string().required().min(6)
     })
 
-    console.log(req.body)
     if(!(await schema.isValid(req.body)))
         return res.status(400).json({
             status: "ERR",

@@ -25,6 +25,13 @@ module.exports = (sequelize, DataTypes) =>{
             allowNull:false,
             defaultValue: false
         },
+        avatar_id:{
+            type: DataTypes.INTEGER,
+            references: {model: "File", key: "id"},
+            onUpdate: "CASCADE",
+            onDelete: "SET NULL",
+            allowNull: true
+        },
         createdAt:{
             type: DataTypes.DATE,
             allowNull:false,
@@ -45,12 +52,18 @@ module.exports = (sequelize, DataTypes) =>{
         if(user.password_h) user.password = await bcrypt.hash(user.password_h, 12)
     })
 
+
     User.associate = (models)=>{
+        User.hasMany(models.Schedule, {
+            foreignKey:["provider_id", "user_id"],
+            as: "hours"
+        })
         User.belongsTo(models.File, {
-            foreignKey: "avatar_id",
+            foreignKey: ["avatar_id"],
             as: "avatar"
         })
     }
+
 
     return User
 }
