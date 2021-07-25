@@ -26,12 +26,11 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
     "sucrase": "^3.20.0",
     "yup": "^0.32.9"
   },
   "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
-    "sequelize-cli": "^6.2.0"
-  }
+  "devDependencies": {}
 }
