@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www.js",
     "dev": "nodemon ./bin/www.js",
-    "build":"npx sequelize db:migrate --env production && nodemon ./bin/www.js"
+    "build":"npx sequelize db:migrate --env production", 
+    "postbuild": "npx sequelize db:seed:all --env production"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
