@@ -1,5 +1,5 @@
 import db from "../database/models/index.js"
-import { Sequelize, sequelize } from "sequelize"
+import { Sequelize, sequelize } from "../database/models/index.js"
 import jwt from "jsonwebtoken"
 
 const Op = Sequelize.Op

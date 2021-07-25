@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node -r esm ./bin/www.js",
-    "dev": "nodemon -r esm ./bin/www.js"
+    "start": "nodemon ./bin/www.js",
+    "dev": "nodemon ./bin/www.js",
+    "build":"npx sequelize db:migrate --env production && nodemon ./bin/www.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

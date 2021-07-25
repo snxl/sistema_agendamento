@@ -18,10 +18,6 @@ import providersRouter from "./routes/providers.js"
 import scheduleRoute from "./routes/scheduleRoute.js"
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-
 export default new class App{
 
     constructor(){
