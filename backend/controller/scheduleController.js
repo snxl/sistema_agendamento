@@ -5,10 +5,14 @@ export default new class ScheduleController{
 
     async store(req, res){
 
-        const { date, hour, provider, user } = req.scheduling
+        const { fullDate, date } = req.scheduling
 
-        const create = await services.store({})
+        const { provider_id } = req.body
 
-        res.json(req.scheduling)
+        const { id } = req.userAuth
+
+        const create = await services.store({date: fullDate, provider_id, user_id: id })
+
+        res.json(create)
     }
 }

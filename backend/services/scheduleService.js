@@ -6,9 +6,11 @@ export default new class scheduleService {
 
         try {
             
-            const insert = await db.Schedule.create(data)
+            return await db.Schedule.create(data)
 
         } catch (error) {
+            
+            return error
             
         }
     }

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import { promisify } from "util"
+import db from "../database/models"
 
 
 export default async (req, res, next)=>{
@@ -17,7 +18,12 @@ export default async (req, res, next)=>{
         const decode = await promisify(jwt.verify)(token, process.env.TOKEN_SECRET)
 
         req.userAuth = decode
-        next()
+
+        const user = await db.user.findByPk(decode.id)
+
+        if(user) next()
+        else throw new Error()
+        
     } catch (error) {
 
         return res.status(401).json({

@@ -13,6 +13,7 @@ export default new class UserService{
                 where:{
                     provider: false
                 },
+                attributes:["id", "email", "name", "provider", "avatar_id"],
                 include:[{
                     model: db.File,
                     as: "avatar",

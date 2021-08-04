@@ -4,7 +4,7 @@ module.exports = (Sequelize, DataTypes)=>{
 
     const Schedule = Sequelize.define("Schedule", {
 
-        appointment:{
+        date:{
             type: DataTypes.DATE,
             allowNull: false, 
             primaryKey: true
@@ -23,7 +23,10 @@ module.exports = (Sequelize, DataTypes)=>{
             references: {model: "user", key: "id"},
             onUpdate: "CASCADE",
             onDelete: "CASCADE",
-            
+        },
+        canceled_at:{
+            type: DataTypes.DATE,
+            field: "canceled_at"
         },
         createdAt:{
             type: DataTypes.DATE,

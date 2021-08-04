@@ -10,7 +10,7 @@ export default new class ProviderService{
                 where:{
                     provider: true
                 },
-                attributes:[ "id", "name", "email", "avatar_id"],
+                attributes:[ "id", "name", "email", "avatar_id", "provider"],
                 include:[{
                     model:db.File,
                     as:"avatar",

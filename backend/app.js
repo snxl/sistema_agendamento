@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import fs from "fs";
 import { resolve } from "path"
 import cors from "cors"
+import SwaggerUI from 'swagger-ui-express';
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -16,7 +17,6 @@ dotenv.config()
 import usersRouter from './routes/users.js';
 import providersRouter from "./routes/providers.js"
 import scheduleRoute from "./routes/scheduleRoute.js"
-
 
 export default new class App{
 
@@ -47,6 +47,7 @@ export default new class App{
     }
 
     routes(){
+        this.app.use("/api-docs", SwaggerUI.serve, SwaggerUI.setup(JSON.parse(fs.readFileSync("./swagger.json", "utf-8"))))
         this.app.use('/users', usersRouter );  
         this.app.use("/providers", providersRouter)      
         this.app.use("/schedule", scheduleRoute) 

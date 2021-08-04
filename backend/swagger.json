@@ -1,0 +1,34 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Body O'Cloack",
+        "description": "API para cadastro e agendamentos de horários",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3500",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "sign-un",
+            "description": "rota de login"
+        },
+        {
+            "name":"sign-up",
+            "description": "rota de cadastro"
+        },
+        {
+            "name":"update",
+            "description":"rota de update de dados do user"
+        }
+    ],
+    "schemes": ["http"],
+    "paths":[{
+
+    }],
+    "consumes": ["application/json", "multipart/form-data"],
+    "produces": ["application/json"]
+}
