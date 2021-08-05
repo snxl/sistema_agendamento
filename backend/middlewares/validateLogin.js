@@ -1,5 +1,5 @@
 import * as yup from "yup"
-import db from "../database/models"
+import db from "../database/models/index.js"
 import bcrypt from "bcryptjs"
 
 export default async (req, res, next)=>{

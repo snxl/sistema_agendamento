@@ -9,18 +9,17 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
         },
-        appointment:{
+        date:{
             type: Sequelize.DATE,
             allowNull: false, 
-            primaryKey: true
         },
         provider_id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
-            allowNull: false,
             references: {model: "users", key: "id"},
             onUpdate: "CASCADE",
             onDelete: "CASCADE",
+            allowNull:true
         },
         user_id:{
             type: Sequelize.INTEGER,
@@ -29,6 +28,9 @@ module.exports = {
             onUpdate: "CASCADE",
             onDelete: "CASCADE",
             
+        },
+        canceled_at: {
+            type: Sequelize.DATE
         },
         createdAt:{
             type: Sequelize.DATE,

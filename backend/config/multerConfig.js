@@ -2,6 +2,9 @@ import multer from "multer"
 import crypto from "crypto"
 import { resolve, extname } from "path"
 
+
+
+
 export const storage = multer.diskStorage({
     destination: resolve(__dirname, "..", "public", "uploads"),
     filename:(req,file,cb)=>{

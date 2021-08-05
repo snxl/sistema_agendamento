@@ -4,19 +4,21 @@ import path from 'path';
 import session from "express-session"
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import { fileURLToPath } from 'url';
 import fs from "fs";
-import path from "path"
+import { resolve } from "path"
 import cors from "cors"
+import SwaggerUI from 'swagger-ui-express';
 import dotenv from "dotenv"
 
 dotenv.config()
 
 
-import usersRouter from './routes/users';
-import providersRouter from "./routes/providers"
-import scheduleRoute from "./routes/scheduleRoute"
+import usersRouter from './routes/users.js';
+import providersRouter from "./routes/providers.js"
+import scheduleRoute from "./routes/scheduleRoute.js"
 
-class App{
+export default new class App{
 
     constructor(){
         this.app = express();
@@ -39,12 +41,13 @@ class App{
         }));
         this.app.use(
             "/files",
-            express.static(path.resolve(__dirname, "public", "uploads"))
+            express.static(resolve(__dirname, "public", "uploads"))
         )
         this.app.use(express.static(path.join(__dirname, 'public')));
     }
 
     routes(){
+        this.app.use("/api-docs", SwaggerUI.serve, SwaggerUI.setup(JSON.parse(fs.readFileSync("./swagger.json", "utf-8"))))
         this.app.use('/users', usersRouter );  
         this.app.use("/providers", providersRouter)      
         this.app.use("/schedule", scheduleRoute) 
@@ -69,5 +72,3 @@ class App{
     }
 
 }
-
-export default new App()

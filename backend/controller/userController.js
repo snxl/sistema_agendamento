@@ -1,4 +1,4 @@
-import userService from "../services/userService"
+import userService from "../services/userService.js"
 
 export default new class UserController{
 
@@ -12,6 +12,8 @@ export default new class UserController{
 
     async store( req, res ){
         
+        // return res.json("passei pela validação")
+
         const {name, email, password} = req.body
 
         const responseService = await userService.store({name, email, password_h: password})

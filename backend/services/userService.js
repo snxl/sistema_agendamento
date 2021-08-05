@@ -1,5 +1,5 @@
-import db from "../database/models/"
-import { Sequelize, sequelize } from "../database/models/"
+import db from "../database/models/index.js"
+import { Sequelize, sequelize } from "../database/models/index.js"
 import jwt from "jsonwebtoken"
 
 const Op = Sequelize.Op
@@ -13,6 +13,7 @@ export default new class UserService{
                 where:{
                     provider: false
                 },
+                attributes:["id", "email", "name", "provider", "avatar_id"],
                 include:[{
                     model: db.File,
                     as: "avatar",

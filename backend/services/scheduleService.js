@@ -1,4 +1,4 @@
-import db from "../database/models"
+import db from "../database/models/index.js"
 
 export default new class scheduleService {
 
@@ -6,9 +6,14 @@ export default new class scheduleService {
 
         try {
             
-            const insert = await db.Schedule.create(data)
+            return {
+                status:"OK",
+                describe:  await db.Schedule.create(data)
+            }
 
         } catch (error) {
+            
+            return error
             
         }
     }

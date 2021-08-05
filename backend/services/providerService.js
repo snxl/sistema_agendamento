@@ -1,4 +1,4 @@
-import db from "../database/models"
+import db from "../database/models/index.js"
 
 export default new class ProviderService{
 
@@ -6,11 +6,11 @@ export default new class ProviderService{
 
         try {
 
-            return await db.user.findAll({
+            const index = await db.user.findAll({
                 where:{
                     provider: true
                 },
-                attributes:[ "id", "name", "email", "avatar_id"],
+                attributes:[ "id", "name", "email", "avatar_id", "provider"],
                 include:[{
                     model:db.File,
                     as:"avatar",
@@ -22,6 +22,11 @@ export default new class ProviderService{
                     required: false
                 }]
             })
+
+            return {
+                status: "OK",
+                providers: index
+            }
 
         } catch (error) {
 
