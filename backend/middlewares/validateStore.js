@@ -12,7 +12,7 @@ export default async (req, res, next)=>{
     if(!(await schema.isValid(req.body)))
         return res.status(400).json({
             status: "ERR",
-            error: "Validation"
+            error: "Validation fails"
         })
 
     const verify = await db.user.findOne({
@@ -21,11 +21,12 @@ export default async (req, res, next)=>{
         }
     })
 
-    if(await verify)
+    if(verify !== null)
         return  res.status(401).json({
             status: "ERR",
             error: "user exists"
         })
+    else next()
 
-    next()
+
 }

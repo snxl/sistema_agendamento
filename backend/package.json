@@ -9,7 +9,7 @@
     "start": "nodemon ./bin/www.js",
     "build": "npx sequelize db:migrate --env production",
     "postbuild": "npx sequelize db:seed:all --env production",
-    "test": "jest --coverage"
+    "test": "jest --coverage --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

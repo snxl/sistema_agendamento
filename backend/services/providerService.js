@@ -6,7 +6,7 @@ export default new class ProviderService{
 
         try {
 
-            return await db.user.findAll({
+            const index = await db.user.findAll({
                 where:{
                     provider: true
                 },
@@ -22,6 +22,11 @@ export default new class ProviderService{
                     required: false
                 }]
             })
+
+            return {
+                status: "OK",
+                providers: index
+            }
 
         } catch (error) {
 

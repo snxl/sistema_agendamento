@@ -6,7 +6,10 @@ export default new class scheduleService {
 
         try {
             
-            return await db.Schedule.create(data)
+            return {
+                status:"OK",
+                describe:  await db.Schedule.create(data)
+            }
 
         } catch (error) {
             

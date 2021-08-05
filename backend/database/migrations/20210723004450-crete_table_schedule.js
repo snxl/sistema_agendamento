@@ -18,7 +18,7 @@ module.exports = {
             primaryKey: true,
             references: {model: "users", key: "id"},
             onUpdate: "CASCADE",
-            onDelete: "SET NULL",
+            onDelete: "CASCADE",
             allowNull:true
         },
         user_id:{
