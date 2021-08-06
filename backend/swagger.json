@@ -13,7 +13,7 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "sign-un",
+            "name": "sign-in",
             "description": "rota de login"
         },
         {
@@ -23,12 +23,386 @@
         {
             "name":"update",
             "description":"rota de update de dados do user"
+        },
+        {
+            "name": "delete",
+            "description": "rota para deletar usuario"
+        },
+        {
+            "name":"index users",
+            "description":"rota para procurar todos os usuarios com provider false"
+        },
+        {
+            "name": "index providers",
+            "description": "rota para retorno de todos os providers"
+        },
+        {
+            "name": "scheduling",
+            "description": "rota para agendamento com coach"
         }
     ],
     "schemes": ["http"],
-    "paths":[{
+    "paths":{
+        "/users/register":{
+            "post":{
+                "tags":["sign-up"],
+                "summary": "register user",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description":"data for create users",
+                    "required": true,
+                    "type": "string",
+                    "minimum": 1,
+                    "schema": {
+                        "$ref": "#/definitions/register"
+                    }
+                }],
+                "operationId":"userRegister",
+                "consumes":["application/json", "multipart/form-data"],
+                "produces":["application/json"],
+                "responses":{
+                    "200": {
+                        "description": "create user",
+                        "schema": {
+                            "$ref": "#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema": {
+                            "$ref": "#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login":{
+            "post":{
+                "tags":["sign-in"],
+                "consumes":["application/json", "multipart/form-data"],
+                "produces":["application/json"],
+                "summary":"login user",
+                "operationId":"userLogin",
+                "parameters":[{
+                    "in":"body",
+                    "name":"body",
+                    "description":"data for login user",
+                    "required":true,
+                    "type":"string",
+                    "minimum":1,
+                    "schema":{
+                        "$ref":"#/definitions/login"
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"user logged",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/update":{
+            "put":{
+                "tags":["update"],
+                "consumes":["multipart/form-data"],
+                "produces":["application/json"],
+                "summary":"update user",
+                "operationId":"userUpdate",
+                "parameters":[{
+                    "name":"name",
+                    "in":"formData",
+                    "description":"The uploaded name data",
+                    "required":false,
+                    "type":"string"
+                },{
+                    "name":"email",
+                    "in":"formData",
+                    "description":"The uploaded email data",
+                    "required":false,
+                    "type":"string"
+                },{
+                    "name":"password",
+                    "in":"formData",
+                    "description":"The uploaded password data",
+                    "required":false,
+                    "type":"string"
+                },{
+                    "name":"confirmPassword",
+                    "in":"formData",
+                    "description":"The uploaded confirmPassword data",
+                    "required":false,
+                    "type":"string"
+                },{
+                    "name":"oldPassword",
+                    "in":"formData",
+                    "description":"The uploaded oldPassword data",
+                    "required":false,
+                    "type":"string"
+                },{
+                    "name": "file",
+                    "in": "formData",
+                    "description": "The uploaded file data",
+                    "required": false,
+                    "type": "file" 
+                }],
+                "security":[
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"user logged",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/delete":{
+            "delete":{
+                "tags":["delete"],
+                "produces":["application/json"],
+                "summary":"send token to delete user",
+                "operationId":"userDelete",
+                "security":[
+                    {
+                        "Bearer":[]
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"user logged",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/users":{
+            "get":{
+                "tags":["index users"],
+                "produces":["application/json"],
+                "summary":"index all user where provider equal false",
+                "operationId":"indexUserWhereProviderFalse",
+                "responses":{
+                    "200":{
+                        "description":"user logged",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers":{
+            "get":{
+                "tags":["index providers"],
+                "produces":["application/json"],
+                "summary":"index all user where provider equal true",
+                "operationId":"indexUserWhereProviderTrue",
+                "responses":{
+                    "200":{
+                        "description":"user logged",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/schedule/scheduling":{
+            "post":{
+                "tags":["scheduling"],
+                "consumes":["application/json", "multipart/form-data"],
+                "produces":["application/json"],
+                "summary":"scheduling time with coach",
+                "operationId":"appointmentUserWithCoach",
+                "parameters":[{
+                    "in":"body",
+                    "name":"body",
+                    "description":"data for login user",
+                    "required":true,
+                    "type":"string",
+                    "minimum":1,
+                    "schema":{
+                        "$ref":"#/definitions/schedule"
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"user logged",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                },
+                "security":[
+                    {
+                        "Bearer":[]
+                    }
+                ]
+            }
+        }
+    },
+    "securityDefinitions":{
+        "Bearer":{
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "definitions":{
+        "update":{
+            "properties":{
+                "name":{
+                    "type":"string"
+                },
+                "email":{
+                    "type":"string",
+                    "uniqueItems": true
+                },
+                "oldPassword":{
+                    "type":"string"
+                },
+                "password":{
+                    "type":"string"
+                },
+                "confirmPassword":{
+                    "type":"string"
+                }
+            }
+        },
+        "register":{
+            "properties":{
+                "name":{
+                    "type": "string"
+                },
+                "email":{
+                    "type":"string",
+                    "uniqueItems": true
+                },
+                "password":{
+                    "type":"string"
+                }
+            }
+        },
+        "status":{
+            "properties":{
+                "status":{
+                    "type":"string"
+                },
+                "message":{
+                    "type":"string"
+                }
+            }
+        },
+        "login":{
+            "properties":{
+                "email":{
+                    "type":"string",
+                    "uniqueItems": true
+                },
+                "password":{
+                    "type":"string"
+                }
+            }
+        },
+        "schedule":{
+            "properties":{
+                "provider_id":{
+                    "type":"string"
+                },
+                "appointment":{
+                    "type":"string",
+                    "minimum":16
+                }
+            }
+        }
+    }
 
-    }],
-    "consumes": ["application/json", "multipart/form-data"],
-    "produces": ["application/json"]
 }

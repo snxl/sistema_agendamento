@@ -25,7 +25,7 @@ export default async (req, res, next)=>{
     })
 
     if(!(await bcrypt.compare(password, user.password)))
-        return res.status(401).json({
+        return res.status(400).json({
             status:"ERR",
             error:"Password does not match!"
         })

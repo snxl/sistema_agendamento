@@ -20,7 +20,7 @@ router.post('/register', text, validateStore, userController.store);
 
 router.post('/login', text, loginMiddleware, userController.login );
 
-router.put('/update', multer.uploadAvatar.single("file"), auth, validateUpdate, userController.updated);
+router.put('/update',  multer.uploadAvatar.single("file"), auth, validateUpdate, userController.updated);
 
 router.delete("/delete", auth, userController.delete)
 
