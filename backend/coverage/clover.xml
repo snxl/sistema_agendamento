@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <coverage generated="1628381827032" clover="3.2.0">
   <project timestamp="1628381827032" name="All files">
     <metrics statements="1077" coveredstatements="964" conditionals="94" coveredconditionals="59" methods="28" coveredmethods="28" elements="1199" coveredelements="1051" complexity="0" loc="1077" ncloc="1077" packages="9" files="24" classes="24"/>
-=======
-<coverage generated="1628175488342" clover="3.2.0">
-  <project timestamp="1628175488342" name="All files">
-    <metrics statements="1063" coveredstatements="955" conditionals="93" coveredconditionals="59" methods="28" coveredmethods="28" elements="1184" coveredelements="1042" complexity="0" loc="1063" ncloc="1063" packages="9" files="24" classes="24"/>
->>>>>>> parent of 2662188 (documentação de rotas)
     <package name="backend">
       <metrics statements="74" coveredstatements="64" conditionals="5" coveredconditionals="5" methods="5" coveredmethods="5"/>
       <file name="app.js" path="C:\Projetosgerais\mce-case-2\backend\app.js">
