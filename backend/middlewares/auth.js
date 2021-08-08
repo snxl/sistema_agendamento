@@ -5,16 +5,12 @@ import db from "../database/models"
 
 export default async (req, res, next)=>{
 
-    try {
+    const authHeader = req.headers.authorization
 
-        const checkBearer = req.headers.authorization.indexOf("Bearer")
-
-        if(checkBearer === -1){
-    
-            const tokenizer = req.headers.authorization
-    
-            req.headers.authorization = `Bearer ${tokenizer}`
-        }
+    if(!authHeader) return res.status(401).json({
+        status: "ERR",
+        error: "Token not provided"
+    })
 
         const authHeader = req.headers.authorization
 
@@ -26,9 +22,8 @@ export default async (req, res, next)=>{
         const token = authHeader.split(" ")[1]
     
 
+    try {
         const decode = await promisify(jwt.verify)(token, process.env.TOKEN_SECRET)
-
-        console.log(decode)
 
         req.userAuth = decode
 

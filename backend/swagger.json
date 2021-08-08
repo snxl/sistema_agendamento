@@ -13,7 +13,7 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "sign-in",
+            "name": "sign-un",
             "description": "rota de login"
         },
         {
@@ -23,22 +23,6 @@
         {
             "name":"update",
             "description":"rota de update de dados do user"
-        },
-        {
-            "name": "delete",
-            "description": "rota para deletar usuario"
-        },
-        {
-            "name":"index users",
-            "description":"rota para procurar todos os usuarios com provider false"
-        },
-        {
-            "name": "index providers",
-            "description": "rota para retorno de todos os providers"
-        },
-        {
-            "name": "scheduling",
-            "description": "rota para agendamento com coach"
         }
     ],
     "schemes": ["http"],
