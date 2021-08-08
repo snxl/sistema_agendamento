@@ -4,8 +4,6 @@ import bcrypt from "bcryptjs"
 
 export default async (req, res, next) =>{
 
-    console.log(req.body)
-
     const schema = yup.object().shape({
 
         name: yup.string(),
