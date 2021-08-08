@@ -21,7 +21,7 @@ export default new class UserService{
                     required: false
                 },{
                     model: db.Schedule,
-                    as: "hours",
+                    as: "hoursUser",
                     required:false
                 }]
             })

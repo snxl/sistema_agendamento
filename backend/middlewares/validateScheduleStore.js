@@ -35,6 +35,19 @@ export default async (req, res, next)=>{
             fullDate,
             date: data
         }
+
+        const checkAppointment = await db.user.findOne({
+            where:{
+                id:req.body.provider_id
+            },
+            include:[{
+                model:db.Schedule,
+                as:"hours"
+            }]
+        })
+
+        return res.json(checkAppointment)
+        console.log(checkAppointment)
     
         next()
 

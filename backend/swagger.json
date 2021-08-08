@@ -23,10 +23,31 @@
         {
             "name":"update",
             "description":"rota de update de dados do user"
+        },
+        {
+            "name":"coverage tests",
+            "description": "graphics test"
         }
     ],
     "schemes": ["http"],
     "paths":{
+        "/coverage":{
+            "get":{
+                "tags":["coverage tests"],
+                "summary":"page tests results",
+                "operationId":"getTest",
+                "produces":["text/html"],
+                "responses":{
+                    "200":{
+                        "description": "success and returns some html text",
+                        "examples":{
+                            "text/html": "<html><body>Your HTML text</body></html>"
+                        }
+                    }
+                }
+
+            }
+        },
         "/users/register":{
             "post":{
                 "tags":["sign-up"],
