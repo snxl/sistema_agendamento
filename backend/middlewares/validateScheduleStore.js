@@ -17,7 +17,7 @@ export default async (req, res, next)=>{
         if(!(await schema.isValid(req.body)) || req.body.provider_id === req.body.user_id)
             return res.status(400).json({
                 status: "ERR",
-                error: "Validation"
+                error: "Validation fails"
             })
     
         const validateProvider = await db.user.findByPk(req.body.provider_id)
@@ -29,26 +29,54 @@ export default async (req, res, next)=>{
             })
     
         const data = req.body.appointment.split(" ")
+        const hours = data[1].split(":")
         const fullDate = req.body.appointment + ":00"
-    
-        req.scheduling = {
-            fullDate,
-            date: data
-        }
 
-        const checkAppointment = await db.user.findOne({
+        if(await db.user.findOne({
             where:{
                 id:req.body.provider_id
             },
             include:[{
                 model:db.Schedule,
-                as:"hours"
+                as:"hours",
+                where:{
+                    date: req.body.appointment
+                }
             }]
+        }))  return res.json({
+            status:"ERR",
+            error:"date exists"
         })
 
-        return res.json(checkAppointment)
-        console.log(checkAppointment)
-    
+        if(Number(hours[0]) < 8 || Number(hours[0]) > 16) return res.json({
+            status:"ERR",
+            error: "minimum time 8:00 and maximum time 16:00. Minutes can only be marked if they are 00"
+        })
+
+        if( 
+            Number(data[0].split("-")[0]) < moment().format().split("T")[0].split("-")[0]
+        ){
+            return res.json({
+                status:"ERR",
+                error:"year must be greater than or equal to the present date"
+            })
+        }
+
+        if( 
+            Number(data[0].split("-")[0]) == moment().format().split("T")[0].split("-")[0] &&
+            Number(data[0].split("-")[1]) < moment().format().split("T")[0].split("-")[1]
+        ){
+            return res.json({
+                status:"ERR",
+                error:"teste"
+            })
+        }
+
+        req.scheduling = {
+            fullDate,
+            date: data
+        }
+
         next()
 
     } catch (err) {
