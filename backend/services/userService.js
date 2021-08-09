@@ -1,5 +1,6 @@
 import db from "../database/models/index.js"
 import { Sequelize, sequelize } from "../database/models/index.js"
+import { promisify } from "util"
 import jwt from "jsonwebtoken"
 
 const Op = Sequelize.Op
@@ -20,7 +21,7 @@ export default new class UserService{
                     required: false
                 },{
                     model: db.Schedule,
-                    as: "hours",
+                    as: "hoursUser",
                     required:false
                 }]
             })
@@ -159,7 +160,7 @@ export default new class UserService{
 
             }
 
-            const { id, name, email, provider } = await db.user.update({...data, avatar_id: idFile.id}, {
+            const updated = await db.user.update({...data, avatar_id: idFile.id}, {
                 where:{
                     [Op.or]:[{
                         id: unique.id
@@ -167,16 +168,18 @@ export default new class UserService{
                         email: unique.email
                     }]
                 },
+                returning: true,
+                plain: true,
                 transaction: t
             })
             
             await t.commit();
 
-            const token = await jwt.sign({
-                id,
-                name, 
-                email, 
-                provider,
+            const token = await promisify(jwt.sign)({
+                id: updated[1].dataValues.id ,
+                name: updated[1].dataValues.name , 
+                email: updated[1].dataValues.email, 
+                provider: updated[1].dataValues.provider,
             }, process.env.TOKEN_SECRET,{
                 expiresIn: "7d"
             })
@@ -187,8 +190,6 @@ export default new class UserService{
             }
 
         } catch (error) {
-
-            console.log(error)
 
             await t.rollback();
             

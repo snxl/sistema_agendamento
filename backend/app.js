@@ -17,6 +17,7 @@ dotenv.config()
 import usersRouter from './routes/users.js';
 import providersRouter from "./routes/providers.js"
 import scheduleRoute from "./routes/scheduleRoute.js"
+import coverageRoute from "./routes/coverage"
 
 export default new class App{
 
@@ -44,6 +45,7 @@ export default new class App{
             express.static(resolve(__dirname, "public", "uploads"))
         )
         this.app.use(express.static(path.join(__dirname, 'public')));
+        this.app.use(express.static(path.join(__dirname, './coverage/lcov-report/backend/public')));
     }
 
     routes(){
@@ -51,6 +53,7 @@ export default new class App{
         this.app.use('/users', usersRouter );  
         this.app.use("/providers", providersRouter)      
         this.app.use("/schedule", scheduleRoute) 
+        this.app.use("/coverage", coverageRoute)
     }
 
     notFound(){
