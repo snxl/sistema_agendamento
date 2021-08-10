@@ -3,7 +3,11 @@
 module.exports = (Sequelize, DataTypes)=>{
 
     const Schedule = Sequelize.define("Schedule", {
-
+        id : {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         date:{
             type: DataTypes.DATE,
             allowNull: false, 
@@ -21,7 +25,7 @@ module.exports = (Sequelize, DataTypes)=>{
             allowNull: true,
             references: {model: "user", key: "id"},
             onUpdate: "CASCADE",
-            onDelete: "CASCADE",
+            onDelete: "SET NULL",
         },
         canceled_at:{
             type: DataTypes.DATE,

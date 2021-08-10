@@ -16,11 +16,15 @@ const text = multer.uploadText.any()
 
 router.get('/', userController.index);
 
+router.get("/user", auth, userController.findOne)
+
 router.post('/register', text, validateStore, userController.store);
 
 router.post('/login', text, loginMiddleware, userController.login );
 
 router.put('/update', multer.uploadAvatar.single("file"), auth, validateUpdate, userController.updated);
+
+router.put('/update/provider', auth, userController.provider)
 
 router.delete("/delete", auth, userController.delete)
 
