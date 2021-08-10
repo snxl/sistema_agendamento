@@ -20,7 +20,7 @@ export default async (req, res, next)=>{
                 error: "Validation fails"
             })
     
-        const validateProvider = await db.user.findByPk(req.body.provider_id)
+        const validateProvider = await db.user.findByPk(Number(req.body.provider_id))
 
         if(validateProvider.id === req.userAuth.id || validateProvider.provider === false)
             return res.status(403).json({
@@ -30,11 +30,11 @@ export default async (req, res, next)=>{
     
         const data = req.body.appointment.split(" ")
         const hours = data[1].split(":")
-        const fullDate = req.body.appointment + ":00"
+        const fullDate = req.body.appointment + ":00+00:00"
 
         if(await db.user.findOne({
             where:{
-                id:req.body.provider_id
+                id:Number(req.body.provider_id)
             },
             include:[{
                 model:db.Schedule,
@@ -72,6 +72,8 @@ export default async (req, res, next)=>{
             })
         }
 
+        fullDate.replace(/\s/g, 'T')
+
         req.scheduling = {
             fullDate,
             date: data
@@ -79,7 +81,7 @@ export default async (req, res, next)=>{
 
         next()
 
-    } catch (err) {
+    } catch(err) {
 
         console.log(err)
         

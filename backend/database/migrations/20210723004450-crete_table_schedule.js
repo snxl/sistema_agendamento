@@ -15,7 +15,6 @@ module.exports = {
         },
         provider_id:{
             type: Sequelize.INTEGER,
-            primaryKey: true,
             references: {model: "users", key: "id"},
             onUpdate: "CASCADE",
             onDelete: "CASCADE",

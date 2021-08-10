@@ -55,13 +55,17 @@ module.exports = (sequelize, DataTypes) =>{
 
     User.associate = (models)=>{
         User.hasMany(models.Schedule, {
+            onDelete:"SET NULL",
             foreignKey:"provider_id",
             as: "hours"
         })
+
         User.hasMany(models.Schedule, {
+            onDelete:"SET NULL",
             foreignKey:"user_id",
-            as: "hoursUser"
+            as: "hoursUsers"
         })
+
         User.belongsTo(models.File, {
             foreignKey: ["avatar_id"],
             as: "avatar"

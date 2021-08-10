@@ -1,3 +1,4 @@
+import db from "../database/models/index.js"
 import userService from "../services/userService.js"
 
 export default new class UserController{
@@ -69,5 +70,24 @@ export default new class UserController{
 
         if(services.status !== "ERR") return res.status(200).json(services)
         else return res.status(400).json(responseService)
+    }
+
+    async provider(req, res){
+
+        const service = await userService.provider(req.userAuth)
+
+        return service.status == "OK"?
+                res.status(200).json(service):
+                res.status(400).json(service)
+    }
+
+    async findOne(req, res){
+
+        const service = await userService.findOneUser(req.userAuth)
+
+        return service.status == "OK"?
+                res.status(200).json(service):
+                res.status(400).json(service)
+
     }
 }

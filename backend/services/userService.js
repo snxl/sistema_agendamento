@@ -21,7 +21,11 @@ export default new class UserService{
                     required: false
                 },{
                     model: db.Schedule,
-                    as: "hoursUser",
+                    as: "hoursUsers",
+                    required:false
+                },{
+                    model: db.Schedule,
+                    as: "hours",
                     required:false
                 }]
             })
@@ -251,6 +255,79 @@ export default new class UserService{
                 description: err,
 
             }
+        }
+    }
+
+    async toProvider(unique){
+
+        try {
+            
+            const provider = await db.user.update({
+                provider: true
+            },{
+                where:{
+                    id: unique.id
+                }
+            })
+
+            return {
+                status:"OK",
+                description: provider
+            }
+        } catch (err) {
+            
+            return {
+                status:"ERR",
+                error:"update failed",
+                description:err
+            }
+
+        }
+    }
+
+    async findOneUser(unique){
+
+        try {
+            
+            const user = await db.user.findOne({
+                where:{
+                    [Op.and]:[{
+                        id: unique.id
+                    },{
+                        email: unique.email
+                    }]
+                },
+                include:[
+                    {
+                        model: db.File,
+                        as: "avatar",
+                        required: false
+                    },
+                    {
+                        model: db.Schedule,
+                        as:"hours"
+                    },
+                    {
+                        model: db.Schedule,
+                        as: "hoursUsers",
+                        required:false
+                    }
+                ]
+            })
+
+            return {
+                status:"OK",
+                description:user
+            }
+
+        } catch (err) {
+            
+            return {
+                status:"ERR",
+                error:"failed to fetch data",
+                description:err
+            }
+
         }
     }
 }

@@ -13,7 +13,6 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-
 import usersRouter from './routes/users.js';
 import providersRouter from "./routes/providers.js"
 import scheduleRoute from "./routes/scheduleRoute.js"

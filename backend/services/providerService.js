@@ -20,6 +20,10 @@ export default new class ProviderService{
                     model: db.Schedule,
                     as: "hours",
                     required: false
+                },{
+                    model: db.Schedule,
+                    as:"hours",
+                    required:false
                 }]
             })
 

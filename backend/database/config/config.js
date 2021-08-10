@@ -6,12 +6,16 @@ module.exports = {
     database: process.env.DB_DATABASE,
     port:process.env.PORT_DATABASE,
     host: process.env.HOST,
-    dialect: process.env.DIALECT,
+    dialect: "postgres",
     define:{
       timestamps:true,
       underscored: true,
       underscoredAll:true
-    }
+    },    
+    dialectOptions: {
+      useUTC: false,
+    },
+    timezone:process.env.TIMEZONE
   },
   test: {
     username: process.env.DB_USER,
