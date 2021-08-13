@@ -74,7 +74,7 @@ export default new class UserController{
 
     async provider(req, res){
 
-        const service = await userService.provider(req.userAuth)
+        const service = await userService.toProvider(req.userAuth)
 
         return service.status == "OK"?
                 res.status(200).json(service):
@@ -83,7 +83,9 @@ export default new class UserController{
 
     async findOne(req, res){
 
-        const service = await userService.findOneUser(req.userAuth)
+        const { pageUser, pageProvider } = req.query
+
+        const service = await userService.findOneUser(req.userAuth, Number(pageUser), Number(pageProvider))
 
         return service.status == "OK"?
                 res.status(200).json(service):

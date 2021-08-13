@@ -9,4 +9,16 @@ export default new class ProviderController{
 
         res.json(response)
     }
+
+    async getProvider(req, res){
+
+        const { parsedDate } = req
+
+        const { id } = req.userAuth
+
+        const response = await services.oneProvider(parsedDate, id)
+
+        res.json(response)
+
+    }
 }

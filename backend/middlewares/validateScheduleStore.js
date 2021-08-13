@@ -1,6 +1,7 @@
 import * as yup from "yup"
 import db from "../database/models"
 import moment from "moment"
+import { parseISO } from "date-fns"
 
 export default async (req, res, next)=>{
 
@@ -32,7 +33,7 @@ export default async (req, res, next)=>{
         const hours = data[1].split(":")
         const fullDate = req.body.appointment + ":00+00:00"
 
-        if(await db.user.findOne({
+        const dateCheck = await db.user.findOne({
             where:{
                 id:Number(req.body.provider_id)
             },
@@ -40,10 +41,12 @@ export default async (req, res, next)=>{
                 model:db.Schedule,
                 as:"hours",
                 where:{
-                    date: req.body.appointment
+                    date: fullDate
                 }
             }]
-        }))  return res.json({
+        })
+
+        if(dateCheck)  return res.json({
             status:"ERR",
             error:"date exists"
         })
@@ -72,10 +75,8 @@ export default async (req, res, next)=>{
             })
         }
 
-        fullDate.replace(/\s/g, 'T')
-
         req.scheduling = {
-            fullDate,
+            fullDate: parseISO(fullDate.replace(/\s/g, 'T')),
             date: data
         }
 
