@@ -35,10 +35,54 @@
         {
             "name":"find user",
             "description":"find user by token"
+        },
+        {
+            "name": "data provider",
+            "description":"all data from the provider with a date as parameter"
         }
     ],
     "schemes": ["http"],
     "paths":{
+        "/providers/provider_data":{
+            "get":{
+                "tags":["data provider"],
+                "summary":"find all user data",
+                "operationId":"dataProviderDate",
+                "produces":["application/json"],
+                "parameters": [{
+                    "in": "query",
+                    "name": "date",
+                    "description":"date for filter",
+                    "required": true,
+                    "type": "string",
+                    "minimum": 12
+                }],
+                "security":[
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"return datas",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"token is not provided",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
         "/users/user":{
             "get":{
                 "tags":["find user"],

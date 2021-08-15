@@ -17,6 +17,7 @@ import usersRouter from './routes/users.js';
 import providersRouter from "./routes/providers.js"
 import scheduleRoute from "./routes/scheduleRoute.js"
 import coverageRoute from "./routes/coverage"
+import notificationsRoute from "./routes/notifications.js"
 
 export default new class App{
 
@@ -53,6 +54,7 @@ export default new class App{
         this.app.use("/providers", providersRouter)      
         this.app.use("/schedule", scheduleRoute) 
         this.app.use("/coverage", coverageRoute)
+        this.app.use("/notifications", notificationsRoute)
     }
 
     notFound(){

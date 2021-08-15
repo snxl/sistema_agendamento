@@ -5,8 +5,6 @@ export default new class scheduleService {
     async store(data){
 
         try {
-
-            console.log(data)
             
             return {
                 status:"OK",

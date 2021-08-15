@@ -46,9 +46,13 @@ module.exports = (Sequelize, DataTypes)=>{
     })
 
     Schedule.associate = (models)=>{
-        Schedule.belongsTo(models.File, {
+        Schedule.belongsTo(models.user, {
             foreignKey: "provider_id",
-            as: "provide"
+            as: "provider"
+        })
+        Schedule.belongsTo(models.user, {
+            foreignKey: "user_id",
+            as: "user"
         })
     }
 

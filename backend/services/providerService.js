@@ -59,6 +59,16 @@ export default new class ProviderService{
                             [Op.between]:[startOfDay(parsedDate), endOfDay(parsedDate)]
                         }
                     },
+                    include:[
+                        {
+                            model: db.user,
+                            as:"provider"
+                        },
+                        {
+                            model: db.user,
+                            as:"user"
+                        }
+                    ],
                     order:["date"]
                 })
             }
