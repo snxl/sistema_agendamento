@@ -9,6 +9,7 @@ import auth from "../middlewares/auth.js"
 import loginMiddleware from "../middlewares/validateLogin.js"
 import validateUpdate from '../middlewares/validateUpdate.js';
 import validateStore from '../middlewares/validateStore.js';
+import validateOneUSer from "../middlewares/validateFindOneUser.js"
 
 const router = Router();
 
@@ -16,7 +17,7 @@ const text = multer.uploadText.any()
 
 router.get('/', userController.index);
 
-router.get("/user", auth, userController.findOne)
+router.get("/user", auth, validateOneUSer.validate, userController.findOne)
 
 router.post('/register', text, validateStore, userController.store);
 

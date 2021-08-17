@@ -5,6 +5,8 @@ import db from "../database/models"
 
 export default async (req, res, next)=>{
 
+ 
+
     const authHeader = req.headers.authorization
 
     if(!authHeader) return res.status(401).json({
@@ -14,6 +16,7 @@ export default async (req, res, next)=>{
     
     const token = authHeader.split(" ")[1]
     
+    console.log(token)
 
     try {
         const decode = await promisify(jwt.verify)(token, process.env.TOKEN_SECRET)

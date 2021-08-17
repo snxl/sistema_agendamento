@@ -285,39 +285,41 @@ export default new class UserService{
         }
     }
 
-    async findOneUser(unique){
+    async findOneUser(unique, pageUser, pageProvider){
 
         try {
-            
-            const user = await db.user.findOne({
-                where:{
-                    [Op.and]:[{
-                        id: unique.id
-                    },{
-                        email: unique.email
-                    }]
-                },
-                include:[
-                    {
-                        model: db.File,
-                        as: "avatar",
-                        required: false
-                    },
-                    {
-                        model: db.Schedule,
-                        as:"hours"
-                    },
-                    {
-                        model: db.Schedule,
-                        as: "hoursUsers",
-                        required:false
-                    }
-                ]
-            })
 
             return {
                 status:"OK",
-                description:user
+                description: await db.user.findOne({
+                    where:{
+                        [Op.and]:[{
+                            id: unique.id
+                        },{
+                            email: unique.email,
+                        }]
+                    },
+                    include:[
+                        {
+                            model: db.File,
+                            as: "avatar",
+                            required: false
+                        },
+                        {
+                            model: db.Schedule,
+                            as:"hours",
+                            limit:20,
+                            offset: (pageProvider - 1) * 20,
+                        },
+                        {
+                            model: db.Schedule,
+                            as: "hoursUsers",
+                            required:false,
+                            limit:20,
+                            offset: (pageUser - 1) * 20,
+                        }
+                    ]
+                })
             }
 
         } catch (err) {

@@ -27,10 +27,105 @@
         {
             "name":"coverage tests",
             "description": "graphics test"
+        },
+        {
+            "name": "to provider",
+            "description": "change users to providers"
+        },
+        {
+            "name":"find user",
+            "description":"find user by token"
+        },
+        {
+            "name": "data provider",
+            "description":"all data from the provider with a date as parameter"
         }
     ],
     "schemes": ["http"],
     "paths":{
+        "/providers/provider_data":{
+            "get":{
+                "tags":["data provider"],
+                "summary":"find all user data",
+                "operationId":"dataProviderDate",
+                "produces":["application/json"],
+                "parameters": [{
+                    "in": "query",
+                    "name": "date",
+                    "description":"date for filter",
+                    "required": true,
+                    "type": "string",
+                    "minimum": 12
+                }],
+                "security":[
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"return datas",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"token is not provided",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/user":{
+            "get":{
+                "tags":["find user"],
+                "summary":"find all user data",
+                "operationId":"getUser",
+                "produces":["application/json"],
+                "responses":{
+                    "200":{
+                        "description": "success and returns some json",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/update/provider":{
+            "put":{
+                "tags":["to provider"],
+                "summary":"turn users into providers",
+                "operationId":"userToProvider",
+                "produces":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"user changed",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "400":{
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"token is not provided",
+                        "schema":{
+                            "$ref":"#/definitions/status"
+                        }
+                    }
+                }
+            }
+        },
         "/coverage":{
             "get":{
                 "tags":["coverage tests"],
@@ -42,6 +137,18 @@
                         "description": "success and returns some html text",
                         "examples":{
                             "text/html": "<html><body>Your HTML text</body></html>"
+                        }
+                    },
+                    "400":{
+                        "description":"validation fails",
+                        "schema": {
+                            "$ref": "#/definitions/status"
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/status"
                         }
                     }
                 }

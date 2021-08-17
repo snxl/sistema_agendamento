@@ -11,9 +11,13 @@ export default new class scheduleService {
                 describe:  await db.Schedule.create(data)
             }
 
-        } catch (error) {
+        } catch (err) {
             
-            return error
+            return {
+                status: "ERR",
+                error:"failed to schedule",
+                description: err
+            }
             
         }
     }
