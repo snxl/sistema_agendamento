@@ -5,9 +5,14 @@ export default function Redirect( props ) {
     return (
 
         <>
-            <s.text>
+            <s.div>
 
-                {props.contentText}
+                <s.text>
+
+                    {props.contentText}
+
+
+                </s.text>
 
                 <s.anchor href={props.link}>
 
@@ -15,7 +20,8 @@ export default function Redirect( props ) {
 
                 </s.anchor>
 
-            </s.text>
+            </s.div>
+
         </>
     )
 

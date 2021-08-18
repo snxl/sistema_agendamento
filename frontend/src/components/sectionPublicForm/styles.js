@@ -75,3 +75,13 @@ export const divBtn = styled.div`
         display: flex;
         flex-direction: column;
 `
+export const span = styled.span`
+    background-color:#F52758;
+    font-size: 1rem;
+    width: 80%;
+    min-height: 7%;
+    text-align:center;
+    border-radius:4px;
+    display: flex;
+    align-items: center;
+`

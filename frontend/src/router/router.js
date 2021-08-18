@@ -7,16 +7,14 @@ import Register from "../pages/registro/index.js";
 import Login from "../pages/login/index"
 
 
-export default function Router(){
+export default function Router(props){
     return(
         <>
             <BrowserRouter>
                 <Switch>
                     <PublicRoute path="/register" exact component={Register} />
                     <PublicRoute path="/login" exact component={Login} />
-
-                    {/* <PublicRoute path="/login" exact component={singInPage} />
-                    <PrivateRoute path="/perfil" exact component={Profile} /> */}
+                    <PrivateRoute path="/dashboard" exact component={Register} />
                     <Redirect to="/login" />
                 </Switch>
             </BrowserRouter>

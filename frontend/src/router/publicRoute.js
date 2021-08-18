@@ -6,7 +6,7 @@ export default function PublicRoute({component: Component, ...rest}){
     return (
         <Route {...rest} render={props=>(
             getterCookie()?
-                <Redirect to="profile" />:
+                <Redirect to="dashboard" />:
                 <Component {...props} />
         )} />
     )
