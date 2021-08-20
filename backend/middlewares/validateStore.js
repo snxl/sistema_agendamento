@@ -6,7 +6,13 @@ export default async (req, res, next)=>{
     const schema = yup.object().shape({
         name: yup.string().required(),
         email: yup.string().email().required(),
-        password: yup.string().required().min(6)
+        password: yup.string().required().min(6),
+        confirmPassword: yup.string()
+            .when("password", {
+                is: value => value.length > 0,
+                then: yup.string().required().oneOf([yup.ref("password")])
+        }),
+        phone: yup.string().required().min(11)
     })
 
     if(!(await schema.isValid(req.body)))

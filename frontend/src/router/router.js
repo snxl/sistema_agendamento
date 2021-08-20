@@ -5,6 +5,7 @@ import { Switch, BrowserRouter, Redirect } from "react-router-dom"
 
 import Register from "../pages/registro/index.js";
 import Login from "../pages/login/index"
+import Dashboard from "../pages/dashboard/index.js"
 
 
 export default function Router(props){
@@ -14,7 +15,7 @@ export default function Router(props){
                 <Switch>
                     <PublicRoute path="/register" exact component={Register} />
                     <PublicRoute path="/login" exact component={Login} />
-                    <PrivateRoute path="/dashboard" exact component={Register} />
+                    <PrivateRoute path="/dashboard" exact component={Dashboard} />
                     <Redirect to="/login" />
                 </Switch>
             </BrowserRouter>

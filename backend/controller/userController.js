@@ -15,9 +15,11 @@ export default new class UserController{
         
         // return res.json("passei pela validação")
 
-        const {name, email, password} = req.body
+        const {name, email, password, phone} = req.body
 
-        const responseService = await userService.store({name, email, password_h: password})
+        console.log(phone)
+
+        const responseService = await userService.store({name, email, password_h: password, phone})
 
         if(responseService.status !== "ERR") return res.status(200).json(responseService)
         else return res.status(400).json(responseService)

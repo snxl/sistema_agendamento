@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.DATE,
             allowNull:false,
             field:"updatedAt"
+        },
+        phone:{
+            type: DataTypes.STRING,
+            allowNull:false,
         }
     },{
         tableName:"users",

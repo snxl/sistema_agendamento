@@ -17,12 +17,12 @@ export const articleMain = styled.article`
     background-color: white;
     border-radius: 3px;
     box-shadow: 0px 0px 50px black;
-    height: 85vh;
+    height: 90vh;
     width: 40vw;
     
     @media(max-width: 1279px){
         height: 85vh;
-        width: 40vw;
+        width: 60vw;
     }
 
     @media(max-width:768px){
@@ -42,11 +42,12 @@ export const form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 `
 
 export const divLogo = styled.div`
     margin-top: 4%;
+    margin-bottom: 5%;
     width: 100%;
     height: 20%;
     display: flex;
@@ -55,11 +56,19 @@ export const divLogo = styled.div`
 
 export const divInputs = styled.div`
     width: 100%;
-    height: 40%;
+    min-height: 40%;
     display: flex;
     flex-direction:column;
-    justify-content: space-around;
     align-items: center;
+    margin-top: 3%;
+
+    @media(max-width:768px){
+        margin-top: 2%;
+    }
+
+    @media(max-width:468px){
+        margin-top: 15%;
+    }
 `
 
 export const image = styled.img`
@@ -68,7 +77,7 @@ export const image = styled.img`
 
 export const divBtn = styled.div`
         width: 100%;
-        height: 40%;
+        height: 30%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -76,12 +85,14 @@ export const divBtn = styled.div`
         flex-direction: column;
 `
 export const span = styled.span`
+    margin-top: 2%;
     background-color:#F52758;
     font-size: 1rem;
     width: 80%;
     min-height: 7%;
-    text-align:center;
     border-radius:4px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    color:white;
 `

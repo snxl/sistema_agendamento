@@ -14,7 +14,15 @@ export default function Register (props){
 
                 <s.background src={background} />
 
-                <SectionMainForm />
+                <SectionMainForm
+                    login={false}
+                    logo={false}
+                    textBtn="Registrar"
+                    register={true}
+                    link="/login"
+                    contentText="Já tem conta?"
+                    contentLink="Login"
+                />
 
             </s.main>
         </>
