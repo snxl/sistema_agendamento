@@ -1,11 +1,9 @@
 import jwt from "jsonwebtoken"
 import { promisify } from "util"
 import db from "../database/models"
-
+import {} from "stat"
 
 export default async (req, res, next)=>{
-
-    console.log(req.headers)
 
     const authHeader = req.headers.authorization
 

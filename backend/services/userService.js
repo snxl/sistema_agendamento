@@ -90,6 +90,8 @@ export default new class UserService{
             }
             )
 
+            console.log(token)
+
             return {
                 status: "OK",
                 token

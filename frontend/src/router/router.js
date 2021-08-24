@@ -16,6 +16,7 @@ export default function Router(props){
                     <PublicRoute path="/register" exact component={Register} />
                     <PublicRoute path="/login" exact component={Login} />
                     <PrivateRoute path="/dashboard" exact component={Dashboard} />
+                    <PrivateRoute path="/update" exact component={Dashboard} />
                     <Redirect to="/login" />
                 </Switch>
             </BrowserRouter>

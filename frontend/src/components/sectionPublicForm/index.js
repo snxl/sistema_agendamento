@@ -53,7 +53,8 @@ export default function SectionMainForm (props){
             },
         })
 
-        setterCookie( response.data.token)
+        if(response.data.status === "OK")setterCookie( response.data.token)
+        else return spanError()
 
     }
 
@@ -81,8 +82,7 @@ export default function SectionMainForm (props){
                 return status
             },
         })
-
-
+        
         if( response.data.status === "OK") setterCookie(response.data.token)
         else setError(response.data.error)
     }

@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 import * as services from "../../services/axios_configs"
 import getterToken from "../../utils/getterToken"
+
+import defaultImage from "../../assets/profile_user_default.png"
 
 import * as s from "./styles"
 
 export default function Header (){
 
-    const [profile, setProfile] = useState('')
-
-    
-
+    const [profileName, setProfileName] = useState(null)
+    const [profileImage, setProfileImage] = useState(null)
 
     useEffect(()=>{
-        (async ()=>{
+
+        async function getProfile() {
 
             const token = getterToken()
 
@@ -29,39 +31,48 @@ export default function Header (){
 
             })
 
-            setProfile(user)
+            if(user.data.description.avatar) setProfileImage(user.data.description.avatar.url)
 
-        })()
+            setProfileName(user.data.description.name)
+        }
+
+        getProfile()
         
     }, [])
 
     return (
         <>
 
-            <s.section>
+            <s.header>
+                <s.section>
 
-                <s.article>
+                    <s.article>
 
-                    <s.divProfile>
+                        <s.divProfile>
 
-                        <s.imgProfile 
-                            src={profile.data.description.avatar.url}
-                        />
+                            <s.imgProfile 
+                                src={profileImage ?? defaultImage}
+                            />
 
-                        <s.divProfileUser>
+                            <s.divProfileUser>
 
-                            <s.name>
-                                {profile.data.description.name}
-                            </s.name>
+                                <s.name>
+                                    {profileName}
+                                </s.name>
 
-                        </s.divProfileUser>
+                                <Link to="/update">
+                                    Meu perfil
+                                </Link>
 
-                    </s.divProfile>
+                            </s.divProfileUser>
 
-                </s.article>
+                        </s.divProfile>
 
-            </s.section>
+                    </s.article>
 
+                </s.section>
+            </s.header>
+            
         </>
     )
 

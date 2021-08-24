@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
-export const section = styled.section`
+export const header = styled.header`
     width:100vw;
     height: 12vh;
+`
+
+export const section = styled.section`
+    width:100%;
+    height: 100%;
 `
 
 export const article = styled.article`
@@ -19,7 +24,6 @@ export const divProfile = styled.div`
     flex-direction:row;
     justify-content: space-around;
     align-items: center;
-    background-color: red;
     width:15%;
     height:90%;
     margin-right: 2%;
@@ -41,9 +45,9 @@ export const imgProfile = styled.img`
 `
 export const divProfileUser = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color:blue;
 
     @media(max-width:768px){
         display: none;
@@ -51,3 +55,7 @@ export const divProfileUser = styled.div`
 `
 
 export const name = styled.p``
+
+export const link = styled.a``
+
+export const divLink = styled.div``
