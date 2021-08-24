@@ -19,9 +19,19 @@ export default function SectionMainForm (props){
     const [error, setError] = useState(false)
 
     const [valueEmail, setEmail] = useState('')
-    const [typeUser] = useState('text')
+    const [typeEmail] = useState('email')
+
     const [valuePassword, setPassword] = useState('')
-    const [typePassword] = useState('password')
+    const [typePassword, setType] = useState('password')
+
+    const [valueTel, setTel] = useState('')
+    const [typeTel] = useState('tel')
+
+    const [valueUser, setUser] = useState('')
+    const [typeUser] = useState('text')
+
+    const [valueConfirmPassword, setConfirmPassword] = useState('')
+    const [typeConfirmPassword] = useState('password')
 
     function spanError(){
 
@@ -43,7 +53,8 @@ export default function SectionMainForm (props){
             },
         })
 
-        setterCookie( response.data.token)
+        if(response.data.status === "OK")setterCookie( response.data.token)
+        else return spanError()
 
     }
 
@@ -60,6 +71,20 @@ export default function SectionMainForm (props){
 
         event.preventDefault()
 
+        const response = await axios.postRegister({
+            name: valueUser,
+            email: valueEmail, 
+            password: valuePassword,
+            confirmPassword: valueConfirmPassword,
+            phone: valueTel.replace(/\D+/g, '')
+        },{
+            validateStatus: function (status) {
+                return status
+            },
+        })
+        
+        if( response.data.status === "OK") setterCookie(response.data.token)
+        else setError(response.data.error)
     }
 
     return(
@@ -90,8 +115,11 @@ export default function SectionMainForm (props){
                             <Input
                                 value={valueEmail}
                                 setValue={setEmail}
-                                type={typeUser}
+                                type={typeEmail}
                                 placeContent="Email"
+                                color="black"
+                                checked={true}
+                                margin="30px"
                             />
                         )}
 
@@ -100,8 +128,67 @@ export default function SectionMainForm (props){
                                 value={valuePassword}
                                 setValue={setPassword}
                                 type={typePassword}
+                                setType={setType}
                                 placeContent="Senha"
+                                showPassword={true}
+                                margin="30px"
                             />
+                        )}
+
+                        {props.register && (
+
+                            <>
+                            
+                                <Input
+                                    value={valueUser}
+                                    setValue={setUser}
+                                    type={typeUser}
+                                    placeContent="Usuário"
+                                    showPassword={false}
+                                    required={true}
+                                    minlength="4"
+                                />
+
+                                <Input
+                                    value={valueTel}
+                                    setValue={setTel}
+                                    type={typeTel}
+                                    placeContent="Telefone"
+                                    showPassword={false}
+                                    required={true}
+                                    pattern="\(\d{2}\)\s*\d{5}-\d{4}"
+                                />
+
+                                <Input
+                                    value={valueEmail}
+                                    setValue={setEmail}
+                                    type={typeEmail}
+                                    placeContent="E-mail"
+                                    showPassword={false}
+                                    required={true}
+                                />
+
+                                <Input
+                                    value={valuePassword}
+                                    setValue={setPassword}
+                                    type={typePassword}
+                                    placeContent="Senha"
+                                    showPassword={false}
+                                    required={true}
+                                    minlength="6"
+                                />
+
+                                <Input
+                                    value={valueConfirmPassword}
+                                    setValue={setConfirmPassword}
+                                    type={typeConfirmPassword}
+                                    placeContent="Confirmar senha"
+                                    showPassword={false}
+                                    required={true}
+                                    minlength="6"
+                                />
+
+                            </>
                         )}
 
                     </s.divInputs>

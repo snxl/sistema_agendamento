@@ -1,11 +1,9 @@
 import jwt from "jsonwebtoken"
 import { promisify } from "util"
 import db from "../database/models"
-
+import {} from "stat"
 
 export default async (req, res, next)=>{
-
- 
 
     const authHeader = req.headers.authorization
 
@@ -15,8 +13,6 @@ export default async (req, res, next)=>{
     })
     
     const token = authHeader.split(" ")[1]
-    
-    console.log(token)
 
     try {
         const decode = await promisify(jwt.verify)(token, process.env.TOKEN_SECRET)
