@@ -120,7 +120,8 @@ export const pointer = styled.img``
 
 export const divAppointment = styled.div`
     height: 100%;
-    width: 70%;
+    width: 50%;
     background-color: ${({appoint}) => appoint? "#FEA051" : ""};
     border-radius: 12px;
+    margin-right: 20%;
 `
